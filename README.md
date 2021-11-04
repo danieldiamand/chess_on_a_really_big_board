@@ -7,3 +7,13 @@ React project based on the chess variant of the same name.
 > - Function to return all legal moves
 > - Improve UI and scaling with window size
 > - Read and use text moves
+
+To run for first time;
+cd my-app
+npm install
+npm start
+
+requires:
+nodeJS
+lodash
+

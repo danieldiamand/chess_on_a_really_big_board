@@ -99,6 +99,22 @@ function updateBoardMoves(selectedSquare, boardArray, turn) {
         [-2, -1],
       ]);
       break;
+    case selectedPiece.piece === PIECES.ARCHBISHOP:
+      lineLogic(args, 1, 1);
+      lineLogic(args, 1, -1);
+      lineLogic(args, -1, 1);
+      lineLogic(args, -1, -1);
+      flowerLogic(args, [
+        [1, 2],
+        [-1, 2],
+        [1, -2],
+        [-1, -2],
+        [2, 1],
+        [-2, 1],
+        [2, -1],
+        [-2, -1],
+      ]);
+      break;
     case selectedPiece.piece === PIECES.MOON:
       flowerLogic(args, [
         [0, 2],

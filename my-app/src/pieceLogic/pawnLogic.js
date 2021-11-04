@@ -105,7 +105,14 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray }) {
       [selectedSquare[0] - turnDirection, selectedSquare[1] + 1, "moveState"],
       MOVE_STATES.LEGAL_TAKING
     );
-  }
+  } else {
+    for(let i= selectedSquare[0]; i > -1  && i < newBoardArray.length ; i = i+ turnDirection){
+      if (get(newBoardArray, [i, selectedSquare[1] + 1, "enpassantable"]) === PAWN_STATES.JUST_LEAPED) 
+      {console.log("could en passant")} else {
+        console.log(get(newBoardArray, [i, selectedSquare[1] + 1, "enpassantable"]))
+      }
+      
+  }}
 
   if (
     get(newBoardArray, [
