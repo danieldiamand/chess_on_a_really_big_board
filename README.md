@@ -8,12 +8,12 @@ React project based on the chess variant of the same name.
 > - Improve UI and scaling with window size
 > - Read and use text moves
 
-To run for first time;
-cd my-app
-npm install
-npm start
-
-requires:
-nodeJS
-lodash
+## Requires:
+> - nodeJS v16.13.0
+> - lodash
+> 
+## To run for first time:
+> - $ cd my-app
+> - $ npm install
+> - $ npm start
 
