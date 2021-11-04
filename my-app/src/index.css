@@ -1,13 +1,90 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  text-align: center;
+  font-family: sans-serif;
+}
+h1 {
+  font-style: italic;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+p {
+  font-size: large;
+}
+
+.App {
+  background-color: grey;
+  display: inline-block;
+}
+
+.movingPiece {
+  z-index: 1;
+  pointer-events: none;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 0px;
+  height: 0px;
+}
+
+.movingPiece img {
+  width: 60px;
+  height: auto;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+
+.chessboard {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  border-style: solid;
+  text-align: center;
+  height: 70%;
+}
+
+.chessboard > div {
+  height: 70px;
+}
+
+.chessboard > div > div {
+  width: 70px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.chessboard img {
+  height: 95%;
+  user-select: none;
+}
+
+.chessboard > div:nth-child(odd) > div:nth-child(even),
+.chessboard > div:nth-child(even) > div:nth-child(odd) {
+  background: SandyBrown;
+}
+.chessboard > div:nth-child(even) > div:nth-child(even),
+.chessboard > div:nth-child(odd) > div:nth-child(odd) {
+  background: Chocolate !important;
+}
+
+.opaque {
+  opacity: 60%;
+}
+
+.squareHighlight {
+  opacity: 0.5;
+  user-select: none;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
