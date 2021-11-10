@@ -67,7 +67,7 @@ export function updateBoardArray(
   return newBoardArray;
 }
 
-function logBoard(board) {
+export function logBoard(board) {
   board.forEach((row, rowIndex) => {
     const values = [];
     const styles = [];

@@ -1,10 +1,11 @@
 import { checkIsTakeable } from "../utils";
+import { isMoveLegal } from "./isMoveLegal";
 import { PIECES, MOVE_STATES } from "../constants";
 import get from "lodash.get";
 import set from "lodash.set";
 
 function flowerLogic(
-  { selectedPiece, selectedSquare, newBoardArray },
+  { selectedPiece, selectedSquare, newBoardArray, turn },
   patternArray
 ) {
   for (let i = 0; i < patternArray.length; i++) {
@@ -25,15 +26,36 @@ function flowerLogic(
         get(newBoardArray, [currentXCoords, currentYCoords, "piece"]) ===
         PIECES.EMPTY
       ) {
-        set(
+        if (
+          isMoveLegal(
+            newBoardArray,
+            selectedSquare,
+            currentYCoords,
+            currentXCoords,
+            MOVE_STATES.LEGAL_EMPTY,
+            turn
+          )
+        ) {
+          set(
+            newBoardArray,
+            [currentXCoords, currentYCoords, "moveState"],
+            MOVE_STATES.LEGAL_EMPTY
+          );
+        }
+      }
+    } else {
+      if (
+        isMoveLegal(
           newBoardArray,
-          [currentXCoords, currentYCoords, "moveState"],
-          MOVE_STATES.LEGAL_EMPTY
-        );
-      } else {
+          selectedSquare,
+          currentYCoords,
+          currentXCoords,
+          MOVE_STATES.LEGAL_TAKING,
+          turn
+        )
+      ) {
         set(
-          newBoardArray,
-          [currentXCoords, currentYCoords, "moveState"],
+          newBoardArray[(currentXCoords, currentYCoords, "moveState")],
           MOVE_STATES.LEGAL_TAKING
         );
       }

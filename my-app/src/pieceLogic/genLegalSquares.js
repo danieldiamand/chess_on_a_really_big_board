@@ -13,7 +13,7 @@ function updateBoardMoves(selectedSquare, boardArray, turn) {
     selectedSquare[0],
     selectedSquare[1],
   ]);
-  let args = { selectedPiece, selectedSquare, newBoardArray };
+  let args = { selectedPiece, selectedSquare, newBoardArray, turn };
 
   //main board logic below
   switch (true) {
