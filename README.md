@@ -10,7 +10,7 @@ React project based on the chess variant of the same name.
 > - Improve UI and scaling with window size
 > - Read and use text moves
 > - Castling doesn't work
-> - Rewrite pawnLogic.js
+> - Improve updatePiecePosition.js (still retroactively checks for enpassant and castling)
 
 ## Requires:
 

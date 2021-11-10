@@ -20,12 +20,25 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
       selectedSquare[0] - turnDirection === newBoardArray.length - 1
         ? MOVE_STATES.LEGAL_PROMOTION
         : MOVE_STATES.LEGAL_EMPTY;
-    set(
-      newBoardArray,
-      [selectedSquare[0] - turnDirection, selectedSquare[1], "moveState"],
-      newMoveState
-    );
+    if (
+      isMoveLegal(
+        newBoardArray,
+        selectedSquare,
+        selectedSquare[0] - turnDirection,
+        selectedSquare[1],
+        newMoveState,
+        turn
+      )
+    ) {
+      set(
+        newBoardArray,
+        [selectedSquare[0] - turnDirection, selectedSquare[1], "moveState"],
+        newMoveState
+      );
+    }
   }
+  // let pawn leap up to half way across the board, if it hasn't moved before
+
   if (
     get(newBoardArray, [selectedSquare[0], selectedSquare[1]]).enpassantable ===
     PAWN_STATES.CAN_LEAP
@@ -65,133 +78,71 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
       }
     }
   }
-  // check if enPassant possible doesn't work atm
-  // if (selectedSquare[0] < newBoardArray.length - 3 && selectedSquare[0] > 2) {
-  //   for (
-  //     let j = selectedSquare[0];
-  //     j < newBoardArray.length && j > -1;
-  //     j = j + turnDirection
-  //   ) {
-  //     if (
-  //       get(newBoardArray, [j, selectedSquare[1] - 1]) === PAWN_STATES.JUST_LEAPED
-  //     ) {
-  //       legalSquareArray.push([
-  //         selectedSquare[0] - turnDirection,
-  //         selectedSquare[1] - 1,
-  //         true,
-  //       ]);
-  //       break;
-  //     }
-  //     if (
-  //       get(newBoardArray, [j, selectedSquare[1] + 1]) === PAWN_STATES.JUST_LEAPED
-  //     ) {
-  //       legalSquareArray.push([
-  //         selectedSquare[0] - turnDirection,
-  //         selectedSquare[1] + 1,
-  //         true,
-  //       ]);
-  //       break;
-  //     }
-  //   }
-  // }
-
-  //check if take diagnol
-  if (
-    get(newBoardArray, [
-      selectedSquare[0] - turnDirection,
-      selectedSquare[1] + 1,
-      "piece",
-    ]) !== PIECES.EMPTY &&
-    checkIsTakeable(
+  function leftRightPawnActions(shiftDirection) {
+    //check if can take diagnolly
+    if (
       get(newBoardArray, [
         selectedSquare[0] - turnDirection,
-        selectedSquare[1] + 1,
-      ]),
-      selectedPiece.colour
-    )
-  ) {
-    if (
-      isMoveLegal(
-        newBoardArray,
-        selectedSquare,
-        selectedSquare[0] - turnDirection,
-        selectedSquare[1] + 1,
-        MOVE_STATES.LEGAL_EMPTY,
-        turn
+        selectedSquare[1] + shiftDirection,
+        "piece",
+      ]) !== PIECES.EMPTY &&
+      checkIsTakeable(
+        get(newBoardArray, [
+          selectedSquare[0] - turnDirection,
+          selectedSquare[1] + shiftDirection,
+        ]),
+        selectedPiece.colour
       )
     ) {
-      set(
-        newBoardArray,
-        [selectedSquare[0] - turnDirection, selectedSquare[1] + 1, "moveState"],
-        MOVE_STATES.LEGAL_TAKING
-      );
-    }
-  } else {
-    for (
-      let i = selectedSquare[0];
-      i > -1 && i < newBoardArray.length;
-      i = i + turnDirection
-    ) {
       if (
-        get(newBoardArray, [i, selectedSquare[1] + 1, "enpassantable"]) ===
-        PAWN_STATES.JUST_LEAPED
+        isMoveLegal(
+          newBoardArray,
+          selectedSquare,
+          selectedSquare[0] - turnDirection,
+          selectedSquare[1] + shiftDirection,
+          MOVE_STATES.LEGAL_EMPTY,
+          turn
+        )
       ) {
         set(
           newBoardArray,
           [
             selectedSquare[0] - turnDirection,
-            selectedSquare[1] + 1,
+            selectedSquare[1] + shiftDirection,
             "moveState",
           ],
-          MOVE_STATES.LEGAL_EN_PASSANT
+          MOVE_STATES.LEGAL_TAKING
         );
-        break;
       }
-    }
-  }
-
-  if (
-    get(newBoardArray, [
-      selectedSquare[0] - turnDirection,
-      selectedSquare[1] - 1,
-      "piece",
-    ]) !== PIECES.EMPTY &&
-    checkIsTakeable(
-      get(newBoardArray, [
-        selectedSquare[0] - turnDirection,
-        selectedSquare[1] - 1,
-      ]),
-      selectedPiece.colour
-    )
-  ) {
-    set(
-      newBoardArray,
-      [selectedSquare[0] - turnDirection, selectedSquare[1] - 1, "moveState"],
-      MOVE_STATES.LEGAL_TAKING
-    );
-  } else {
-    for (
-      let i = selectedSquare[0];
-      i > -1 && i < newBoardArray.length;
-      i = i + turnDirection
-    ) {
-      if (
-        get(newBoardArray, [i, selectedSquare[1] - 1, "enpassantable"]) ===
-        PAWN_STATES.JUST_LEAPED
+    } else {
+      for (
+        let i = selectedSquare[0];
+        i > -1 && i < newBoardArray.length;
+        i = i + turnDirection
       ) {
-        set(
-          newBoardArray,
-          [
-            selectedSquare[0] - turnDirection,
-            selectedSquare[1] - 1,
-            "moveState",
-          ],
-          MOVE_STATES.LEGAL_EN_PASSANT
-        );
-        break;
+        if (
+          get(newBoardArray, [
+            i,
+            selectedSquare[1] + shiftDirection,
+            "enpassantable",
+          ]) === PAWN_STATES.JUST_LEAPED
+        ) {
+          set(
+            newBoardArray,
+            [
+              selectedSquare[0] - turnDirection,
+              selectedSquare[1] + shiftDirection,
+              "moveState",
+            ],
+            MOVE_STATES.LEGAL_EN_PASSANT
+          );
+          break;
+        }
       }
     }
   }
+  leftRightPawnActions(1);
+  leftRightPawnActions(-1);
 }
 
 export default pawnLogic;
