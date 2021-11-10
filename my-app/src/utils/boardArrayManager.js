@@ -47,7 +47,8 @@ export function updateBoardArray(
   selectedSquare,
   currentRow,
   currentColumn,
-  turn
+  turn,
+  moveType
 ) {
   let newBoardArray = cloneDeep(boardArray);
   const movedPiece = get(newBoardArray, [selectedSquare[0], selectedSquare[1]]);
@@ -60,7 +61,8 @@ export function updateBoardArray(
   };
   newBoardArray = updatePiecePosition(
     updateCastling(updateEnPassant(newBoardArray, args), args),
-    args
+    args,
+    moveType
   );
   logBoard(newBoardArray);
   console.log(newBoardArray);

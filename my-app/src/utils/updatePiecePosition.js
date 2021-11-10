@@ -1,28 +1,30 @@
 import get from "lodash.get";
 import set from "lodash.set";
-import { PIECES, PAWN_DIRECTION, MOVE_STATES } from "../constants";
+import { PIECES, COLOUR_TO_DIRECTION, MOVE_STATES } from "../constants";
 import { checkIsTakeable } from "../utils";
 
 function updatePiecePosition(
   newBoardArray,
-  { selectedSquare, currentRow, currentColumn, turn, movedPiece }
+  { selectedSquare, currentRow, currentColumn, turn, movedPiece },
+  moveType
 ) {
   set(newBoardArray, [selectedSquare[0], selectedSquare[1]], {
     piece: PIECES.EMPTY,
   });
   set(newBoardArray, [currentRow, currentColumn], movedPiece);
-  //check and movement for enPassant
-  if (movedPiece.piece === PIECES.PAWN) {
+  //complex move type en passant
+  if ((moveType = MOVE_STATES.LEGAL_EN_PASSANT)) {
     for (
       let i = currentRow;
       i < newBoardArray.length && i > -1;
-      i = i + PAWN_DIRECTION[turn]
+      i = i + COLOUR_TO_DIRECTION[turn]
     ) {
       if (
         get(newBoardArray, [i, currentColumn], {}).piece === PIECES.PAWN &&
         checkIsTakeable(newBoardArray[i][currentColumn], turn)
       ) {
         set(newBoardArray, [i, currentColumn], { piece: PIECES.EMPTY });
+        break;
       }
     }
   }

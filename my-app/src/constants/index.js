@@ -53,7 +53,7 @@ export const PAWN_STATES = {
   CANT_LEAP: "CANT_LEAP",
 };
 
-export const PAWN_DIRECTION = {
+export const COLOUR_TO_DIRECTION = {
   [COLOURS.WHITE]: 1,
   [COLOURS.BLACK]: -1,
 };
