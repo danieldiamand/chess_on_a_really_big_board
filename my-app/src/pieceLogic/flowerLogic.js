@@ -16,11 +16,7 @@ function flowerLogic(
       currentXCoords > -1 &&
       currentXCoords < newBoardArray.length &&
       currentYCoords > -1 &&
-      currentYCoords < newBoardArray.length &&
-      checkIsTakeable(
-        newBoardArray[currentXCoords][currentYCoords],
-        selectedPiece.colour
-      )
+      currentYCoords < newBoardArray.length
     ) {
       if (
         get(newBoardArray, [currentXCoords, currentYCoords, "piece"]) ===
@@ -42,24 +38,25 @@ function flowerLogic(
             MOVE_STATES.LEGAL_EMPTY
           );
         }
-      }
-    } else {
-      if (
-        isMoveLegal(
-          newBoardArray,
-          selectedSquare,
-          currentYCoords,
-          currentXCoords,
-          MOVE_STATES.LEGAL_TAKING,
-          turn
-        )
-      ) {
-        set(
-          newBoardArray[(currentXCoords, currentYCoords, "moveState")],
-          MOVE_STATES.LEGAL_TAKING
-        );
+      }else if (get(newBoardArray, [currentXCoords, currentYCoords, "colour"]) !==
+      turn){
+        if (
+          isMoveLegal(
+            newBoardArray,
+            selectedSquare,
+            currentYCoords,
+            currentXCoords,
+            MOVE_STATES.LEGAL_TAKING,
+            turn
+          )
+        ) {
+          set(
+            newBoardArray, [currentXCoords, currentYCoords, "moveState"],
+            MOVE_STATES.LEGAL_TAKING
+          );
+        }
       }
     }
-  }
+    } 
 }
 export default flowerLogic;
