@@ -3,6 +3,7 @@ import get from "lodash.get";
 import set from "lodash.set";
 import { PAWN_STATES, MOVE_STATES, PIECES, COLOURS } from "../constants";
 import { isMoveLegal } from "./isMoveLegal";
+import { psuedoLegalSet } from "../utils";
 
 function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
   // set direction pawn moves
@@ -20,8 +21,8 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
       selectedSquare[0] - turnDirection === newBoardArray.length - 1
         ? MOVE_STATES.LEGAL_PROMOTION
         : MOVE_STATES.LEGAL_EMPTY;
-    if (
-      isMoveLegal(
+
+      psuedoLegalSet(
         newBoardArray,
         selectedSquare,
         selectedSquare[0] - turnDirection,
@@ -29,13 +30,6 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
         newMoveState,
         turn
       )
-    ) {
-      set(
-        newBoardArray,
-        [selectedSquare[0] - turnDirection, selectedSquare[1], "moveState"],
-        newMoveState
-      );
-    }
   }
   // let pawn leap up to half way across the board, if it hasn't moved before
 
@@ -57,8 +51,8 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
       if (
         get(newBoardArray, [i, selectedSquare[1], "piece"]) === PIECES.EMPTY
       ) {
-        if (
-          isMoveLegal(
+
+          psuedoLegalSet(
             newBoardArray,
             selectedSquare,
             i,
@@ -66,13 +60,7 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
             MOVE_STATES.LEGAL_EMPTY,
             turn
           )
-        ) {
-          set(
-            newBoardArray,
-            [i, selectedSquare[1], "moveState"],
-            MOVE_STATES.LEGAL_EMPTY
-          );
-        }
+
       } else {
         break;
       }

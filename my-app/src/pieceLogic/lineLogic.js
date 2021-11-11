@@ -3,6 +3,7 @@ import get from "lodash.get";
 import set from "lodash.set";
 import { PIECES, MOVE_STATES } from "../constants";
 import { isMoveLegal } from "./isMoveLegal";
+import { psuedoLegalSet } from "../utils";
 
 function lineLogic(
   { selectedPiece, selectedSquare, newBoardArray, turn },
@@ -30,8 +31,7 @@ function lineLogic(
         set(newBoardArray, [y, x, "moveState"], MOVE_STATES.LEGAL_EMPTY);
       }
     } else if (checkIsTakeable(currentPiece, selectedPiece.colour)) {
-      if (
-        isMoveLegal(
+        psuedoLegalSet(
           newBoardArray,
           selectedSquare,
           y,
@@ -39,10 +39,6 @@ function lineLogic(
           MOVE_STATES.LEGAL_TAKING,
           turn
         )
-      ) {
-        set(newBoardArray, [y, x, "moveState"], MOVE_STATES.LEGAL_TAKING);
-        break;
-      }
     } else {
       break;
     }

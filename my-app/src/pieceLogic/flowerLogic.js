@@ -3,6 +3,7 @@ import { isMoveLegal } from "./isMoveLegal";
 import { PIECES, MOVE_STATES } from "../constants";
 import get from "lodash.get";
 import set from "lodash.set";
+import { psuedoLegalSet } from "../utils";
 
 function flowerLogic(
   { selectedPiece, selectedSquare, newBoardArray, turn },
@@ -22,8 +23,7 @@ function flowerLogic(
         get(newBoardArray, [currentXCoords, currentYCoords, "piece"]) ===
         PIECES.EMPTY
       ) {
-        if (
-          isMoveLegal(
+        psuedoLegalSet (
             newBoardArray,
             selectedSquare,
             currentYCoords,
@@ -31,17 +31,11 @@ function flowerLogic(
             MOVE_STATES.LEGAL_EMPTY,
             turn
           )
-        ) {
-          set(
-            newBoardArray,
-            [currentXCoords, currentYCoords, "moveState"],
-            MOVE_STATES.LEGAL_EMPTY
-          );
-        }
+        
       }else if (get(newBoardArray, [currentXCoords, currentYCoords, "colour"]) !==
       turn){
-        if (
-          isMoveLegal(
+
+          psuedoLegalSet(
             newBoardArray,
             selectedSquare,
             currentYCoords,
@@ -49,12 +43,7 @@ function flowerLogic(
             MOVE_STATES.LEGAL_TAKING,
             turn
           )
-        ) {
-          set(
-            newBoardArray, [currentXCoords, currentYCoords, "moveState"],
-            MOVE_STATES.LEGAL_TAKING
-          );
-        }
+        
       }
     }
     } 
