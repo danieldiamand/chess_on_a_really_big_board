@@ -1,11 +1,24 @@
 import { COLOURS, PIECES, MOVE_STATES } from "../constants";
 import get from "lodash.get";
+import set from "lodash.set";
+
+import { isMoveLegal } from "../pieceLogic/isMoveLegal";
 
 export function checkSquareMatch(row, col, square) {
   if (row === square[0] && col === square[1]) {
     return true;
   }
   return false;
+}
+
+export function psuedoLegalSet(newBoardArray,selectedSquare,xCoord,yCoord,moveState,turn){
+  if (isMoveLegal(newBoardArray,selectedSquare,xCoord,yCoord,moveState,turn)){
+    set(
+      newBoardArray,
+      [xCoord, yCoord, "moveState"],
+      moveState
+    );
+  }
 }
 
 export function sumArray(array1, array2, multiply1, multiply2, isFlip) {

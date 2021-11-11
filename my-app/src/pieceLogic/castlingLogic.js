@@ -1,6 +1,7 @@
 import { PIECES, MOVE_STATES } from "../constants";
 import get from "lodash.get";
 import set from "lodash.set";
+import { psuedoLegalSet } from "../utils";
 
 function castlingLogic({ selectedSquare, newBoardArray, turn }) {
   function countToRook(turnDirection, moveState) {
@@ -12,21 +13,23 @@ function castlingLogic({ selectedSquare, newBoardArray, turn }) {
       if (get(newBoardArray, [selectedSquare[0], i, "isCastleable"])) {
         //king moves to exact centre or centre plus one away from starting pos
         if (((selectedSquare[1] + i) / 2) % 1 === 0) {
-          set(
+          psuedoLegalSet (
             newBoardArray,
-            [selectedSquare[0], (selectedSquare[1] + i) / 2, "moveState"],
-            moveState
-          );
+            selectedSquare,
+            selectedSquare[0],
+            (selectedSquare[1] + i) / 2,
+            moveState,
+            turn,
+          )
         } else {
-          set(
+          psuedoLegalSet (
             newBoardArray,
-            [
-              selectedSquare[0],
-              Math.floor((selectedSquare[1] + i) / 2) + 1,
-              "moveState",
-            ],
-            moveState
-          );
+            selectedSquare,
+            selectedSquare[0],
+            Math.floor((selectedSquare[1] + i) / 2)+1,
+            moveState,
+            turn,
+          )
         }
         break;
       } else if (

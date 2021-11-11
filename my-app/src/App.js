@@ -17,9 +17,7 @@ import { genBoardArray, updateBoardArray } from "./utils/boardArrayManager";
 import { COLOURS } from "./constants";
 
 let fenCode =
-  // "r1r5k6r/pppp10P1/16/16/16/16/16/4N11/16/4A11/16/16/16/8O7/PPPP10p1/R1R5K6R";
-  "rnmgboaqkcjbgmnr/pppppppppppppppp/16/16/16/16/16/16/16/16/16/16/16/16/PPPPPPPPPPPPPPPP/R7K6R";
-// let fenCode = "rnbqkbnr/pppppppp/8/8/3Q4/8/PPPPPPPP/RNBQKBNR";
+  "rnmgboaqkcjbgmnr/pppppppppppppppp/16/16/16/16/16/16/16/16/16/16/16/16/PPPPPPPPPPPPPPPP/RNMGBOAQKCJBGMNR";
 
 let mouseCurrentX = null;
 let mouseCurrentY = null;

@@ -26,8 +26,8 @@ function flowerLogic(
         psuedoLegalSet (
             newBoardArray,
             selectedSquare,
-            currentYCoords,
             currentXCoords,
+            currentYCoords,
             MOVE_STATES.LEGAL_EMPTY,
             turn
           )
@@ -38,8 +38,8 @@ function flowerLogic(
           psuedoLegalSet(
             newBoardArray,
             selectedSquare,
-            currentYCoords,
             currentXCoords,
+            currentYCoords,
             MOVE_STATES.LEGAL_TAKING,
             turn
           )

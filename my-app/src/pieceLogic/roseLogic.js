@@ -2,9 +2,10 @@ import { sumArray } from "../utils";
 import { PIECES, MOVE_STATES } from "../constants";
 import get from "lodash.get";
 import set from "lodash.set";
+import { psuedoLegalSet } from "../utils";
 
 function roseLogic(
-  { selectedPiece, selectedSquare, newBoardArray },
+  { selectedPiece, selectedSquare, newBoardArray, turn },
   shiftArray
 ) {
   const permutationArray = [
@@ -40,20 +41,25 @@ function roseLogic(
           get(newBoardArray, [currentSquare[0], currentSquare[1], "piece"]) ===
           PIECES.EMPTY
         ) {
-          set(
+          psuedoLegalSet(
             newBoardArray,
-            [currentSquare[0], currentSquare[1], "moveState"],
-            MOVE_STATES.LEGAL_EMPTY
+            selectedSquare,
+            currentSquare[0], currentSquare[1],
+            MOVE_STATES.LEGAL_EMPTY,
+            turn
           );
         } else if (
           get(newBoardArray, [currentSquare[0], currentSquare[1], "colour"]) !==
           selectedPiece.colour
         ) {
-          set(
+          psuedoLegalSet(
             newBoardArray,
-            [currentSquare[0], currentSquare[1], "moveState"],
-            MOVE_STATES.LEGAL_TAKING
-          );
+            selectedSquare,
+            currentSquare[0],
+            currentSquare[1],
+            MOVE_STATES.LEGAL_TAKING,
+            turn,
+            );
           break;
         } else {
           break;
