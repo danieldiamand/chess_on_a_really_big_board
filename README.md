@@ -9,7 +9,6 @@ React project based on the chess variant of the same name.
 > - Function to return all legal moves
 > - Improve UI and scaling with window size
 > - Read and use text moves
-> - Castling doesn't work
 > - Improve updatePiecePosition.js (still retroactively checks for enpassant and castling)
 
 ## Requires:
