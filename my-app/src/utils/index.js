@@ -75,7 +75,8 @@ export function getMoveStateBoolean(selectedSquare) {
       break;
     }
     case MOVE_STATES.LEGAL_EMPTY:
-    case MOVE_STATES.LEGAL_CASTLE:
+    case MOVE_STATES.LEGAL_CASTLE_MINUS:
+    case MOVE_STATES.LEGAL_CASTLE_PLUS:
     case MOVE_STATES.LEGAL_PROMOTION: {
       isLegal = true;
       break;

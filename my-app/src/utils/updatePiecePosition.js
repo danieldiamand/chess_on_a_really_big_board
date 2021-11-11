@@ -13,7 +13,7 @@ function updatePiecePosition(
   });
   set(newBoardArray, [currentRow, currentColumn], movedPiece);
   //complex move type en passant
-  if ((moveType = MOVE_STATES.LEGAL_EN_PASSANT)) {
+  if (moveType === MOVE_STATES.LEGAL_EN_PASSANT) {
     for (
       let i = currentRow;
       i < newBoardArray.length && i > -1;
@@ -28,34 +28,29 @@ function updatePiecePosition(
       }
     }
   }
-  //check and movement for castling
-  if (movedPiece.MOVE_STATES === MOVE_STATES.LEGAL_CASTLE) {
-    if (selectedSquare[1] - currentColumn < 1) {
-      for (let i = currentColumn; i < newBoardArray.length; i++) {
-        if (get(newBoardArray, [selectedSquare[0], i]).piece === PIECES.ROOK) {
-          set(
-            newBoardArray,
-            [selectedSquare[0], currentColumn - 1],
-            get(newBoardArray, [selectedSquare[0], i])
-          );
-          set(newBoardArray, [selectedSquare[0], i], { piece: PIECES.EMPTY });
-          break;
-        }
-      }
-    }
-    if (selectedSquare[1] - currentColumn > 1) {
-      for (let i = currentColumn; i > -1; i--) {
-        if (get(newBoardArray, [selectedSquare[0], i]).piece === PIECES.ROOK) {
-          set(
-            newBoardArray,
-            [selectedSquare[0], currentColumn + 1],
-            get(newBoardArray, [selectedSquare[0], i])
-          );
-          set(newBoardArray, [selectedSquare[0], i], { piece: PIECES.EMPTY });
-          break;
-        }
-      }
-    }
+  if (moveType === MOVE_STATES.LEGAL_CASTLE_MINUS) {
+    for (let x = selectedSquare[1]; x>-1; x=x- 1){
+       const currentPiece = get(newBoardArray, [selectedSquare[0],x]) 
+       if (currentPiece.piece === PIECES.ROOK){
+         set(newBoardArray, [selectedSquare[0], x], {
+           piece: PIECES.EMPTY,
+         })
+         console.log(currentPiece)
+        set(newBoardArray, [currentRow, currentColumn+1], currentPiece)
+       }
+     }
+  }
+  if (moveType === MOVE_STATES.LEGAL_CASTLE_PLUS) {
+    for (let x = selectedSquare[1]; x<newBoardArray.length; x=x+1){
+       const currentPiece = get(newBoardArray, [selectedSquare[0],x]) 
+       if (currentPiece.piece === PIECES.ROOK){
+         set(newBoardArray, [selectedSquare[0], x], {
+           piece: PIECES.EMPTY,
+         })
+         console.log(currentPiece)
+        set(newBoardArray, [currentRow, currentColumn-1], currentPiece)
+       }
+     }
   }
   return newBoardArray;
 }

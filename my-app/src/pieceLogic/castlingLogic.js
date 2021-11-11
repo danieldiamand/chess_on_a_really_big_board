@@ -3,7 +3,7 @@ import get from "lodash.get";
 import set from "lodash.set";
 
 function castlingLogic({ selectedSquare, newBoardArray, turn }) {
-  function countToRook(turnDirection) {
+  function countToRook(turnDirection, moveState) {
     for (
       let i = selectedSquare[1] + turnDirection;
       -1 < i && i < newBoardArray.length;
@@ -15,7 +15,7 @@ function castlingLogic({ selectedSquare, newBoardArray, turn }) {
           set(
             newBoardArray,
             [selectedSquare[0], (selectedSquare[1] + i) / 2, "moveState"],
-            MOVE_STATES.LEGAL_CASTLE
+            moveState
           );
         } else {
           set(
@@ -25,7 +25,7 @@ function castlingLogic({ selectedSquare, newBoardArray, turn }) {
               Math.floor((selectedSquare[1] + i) / 2) + 1,
               "moveState",
             ],
-            MOVE_STATES.LEGAL_CASTLE
+            moveState
           );
         }
         break;
@@ -40,8 +40,8 @@ function castlingLogic({ selectedSquare, newBoardArray, turn }) {
   if (
     get(newBoardArray, [selectedSquare[0], selectedSquare[1]], "isCastleable")
   ) {
-    countToRook(1);
-    countToRook(-1);
+    countToRook(1, MOVE_STATES.LEGAL_CASTLE_PLUS);
+    countToRook(-1, MOVE_STATES.LEGAL_CASTLE_MINUS);
   }
 }
 
