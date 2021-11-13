@@ -17,5 +17,9 @@ export function isMoveLegal(
       turn
     );
   }
-  return true;
+  return !isSquareChecked(psuedoLegalBoard, y, x, turn);
+}
+
+export function isSquareChecked(boardArray, xPos, yPos, turn) {
+  return false;
 }
