@@ -3,9 +3,11 @@ import flowerLogic from "./flowerLogic";
 import pawnLogic from "./pawnLogic";
 import roseLogic from "./roseLogic";
 import castlingLogic from "./castlingLogic";
+import kingLogic from "./kingLogic";
 import { PIECES } from "../constants";
 import get from "lodash.get";
 import cloneDeep from "lodash.clonedeep";
+import { getKingPos } from "./isMoveLegal";
 
 function updateBoardMoves(selectedSquare, boardArray, turn) {
   let newBoardArray = cloneDeep(boardArray);
@@ -13,8 +15,8 @@ function updateBoardMoves(selectedSquare, boardArray, turn) {
     selectedSquare[0],
     selectedSquare[1],
   ]);
-  let args = { selectedPiece, selectedSquare, newBoardArray, turn };
-
+  const kingPos = getKingPos(boardArray, turn);
+  let args = { selectedPiece, selectedSquare, newBoardArray, turn, kingPos };
   //main board logic below
   switch (true) {
     case selectedPiece.piece === PIECES.ROOK:
@@ -52,7 +54,7 @@ function updateBoardMoves(selectedSquare, boardArray, turn) {
       ]);
       break;
     case selectedPiece.piece === PIECES.KING:
-      flowerLogic(args, [
+      kingLogic(args, [
         [0, 1],
         [0, -1],
         [1, 0],

@@ -5,7 +5,7 @@ import get from "lodash.get";
 import set from "lodash.set";
 import { psuedoLegalSet } from "../utils";
 
-function flowerLogic(
+function kingLogic(
   { selectedPiece, selectedSquare, newBoardArray, turn, kingPos },
   patternArray
 ) {
@@ -30,7 +30,7 @@ function flowerLogic(
           currentYCoords,
           MOVE_STATES.LEGAL_EMPTY,
           turn,
-          kingPos
+          [currentXCoords, currentYCoords]
         );
       } else if (
         get(newBoardArray, [currentXCoords, currentYCoords, "colour"]) !== turn
@@ -42,10 +42,11 @@ function flowerLogic(
           currentYCoords,
           MOVE_STATES.LEGAL_TAKING,
           turn,
-          kingPos
+          [currentXCoords, currentYCoords]
         );
       }
     }
   }
 }
-export default flowerLogic;
+
+export default kingLogic;

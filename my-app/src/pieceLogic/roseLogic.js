@@ -5,7 +5,7 @@ import set from "lodash.set";
 import { psuedoLegalSet } from "../utils";
 
 function roseLogic(
-  { selectedPiece, selectedSquare, newBoardArray, turn },
+  { selectedPiece, selectedSquare, newBoardArray, turn, kingPos },
   shiftArray
 ) {
   const permutationArray = [
@@ -44,9 +44,11 @@ function roseLogic(
           psuedoLegalSet(
             newBoardArray,
             selectedSquare,
-            currentSquare[0], currentSquare[1],
+            currentSquare[0],
+            currentSquare[1],
             MOVE_STATES.LEGAL_EMPTY,
-            turn
+            turn,
+            kingPos
           );
         } else if (
           get(newBoardArray, [currentSquare[0], currentSquare[1], "colour"]) !==
@@ -59,7 +61,8 @@ function roseLogic(
             currentSquare[1],
             MOVE_STATES.LEGAL_TAKING,
             turn,
-            );
+            kingPos
+          );
           break;
         } else {
           break;

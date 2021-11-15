@@ -11,13 +11,27 @@ export function checkSquareMatch(row, col, square) {
   return false;
 }
 
-export function psuedoLegalSet(newBoardArray,selectedSquare,xCoord,yCoord,moveState,turn){
-  if (isMoveLegal(newBoardArray,selectedSquare,xCoord,yCoord,moveState,turn)){
-    set(
+export function psuedoLegalSet(
+  newBoardArray,
+  selectedSquare,
+  xCoord,
+  yCoord,
+  moveState,
+  turn,
+  kingPos
+) {
+  if (
+    isMoveLegal(
       newBoardArray,
-      [xCoord, yCoord, "moveState"],
-      moveState
-    );
+      selectedSquare,
+      xCoord,
+      yCoord,
+      moveState,
+      turn,
+      kingPos
+    )
+  ) {
+    set(newBoardArray, [xCoord, yCoord, "moveState"], moveState);
   }
 }
 

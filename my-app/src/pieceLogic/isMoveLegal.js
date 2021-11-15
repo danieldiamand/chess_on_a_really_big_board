@@ -1,13 +1,28 @@
 import { updateBoardArray } from "../utils/boardArrayManager";
 import { PIECES } from "../constants";
 import get from "lodash.get";
+
+export function getKingPos(boardArray, turn) {
+  for (let x = 0; x < boardArray.length; x++) {
+    for (let y = 0; y < boardArray.length; y++) {
+      if (
+        get(boardArray, [x, y, "piece"]) === PIECES.KING &&
+        get(boardArray, [x, y, "colour"]) === turn
+      ) {
+        return [x, y];
+      }
+    }
+  }
+}
+
 export function isMoveLegal(
   newBoardArray,
   selectedSquare,
   y,
   x,
   moveState,
-  turn
+  turn,
+  kingPos
 ) {
   if (get(newBoardArray, [x, y])) {
     const psuedoLegalBoard = updateBoardArray(
@@ -17,7 +32,7 @@ export function isMoveLegal(
       x,
       turn
     );
-    return !isSquareChecked(psuedoLegalBoard, y, x, turn);
+    return !isSquareChecked(psuedoLegalBoard, kingPos[0], kingPos[1], turn);
   }
 }
 

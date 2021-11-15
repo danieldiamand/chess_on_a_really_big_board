@@ -64,8 +64,7 @@ export function updateBoardArray(
     args,
     moveType
   );
-  logBoard(newBoardArray);
-  console.log(newBoardArray);
+
   return newBoardArray;
 }
 

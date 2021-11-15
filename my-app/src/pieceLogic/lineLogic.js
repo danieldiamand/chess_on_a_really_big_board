@@ -6,7 +6,7 @@ import { isMoveLegal } from "./isMoveLegal";
 import { psuedoLegalSet } from "../utils";
 
 function lineLogic(
-  { selectedPiece, selectedSquare, newBoardArray, turn },
+  { selectedPiece, selectedSquare, newBoardArray, turn, kingPos },
   horizontalCount,
   verticalCount
 ) {
@@ -25,20 +25,23 @@ function lineLogic(
           y,
           x,
           MOVE_STATES.LEGAL_EMPTY,
-          turn
+          turn,
+          kingPos
         )
       ) {
         set(newBoardArray, [y, x, "moveState"], MOVE_STATES.LEGAL_EMPTY);
       }
     } else if (checkIsTakeable(currentPiece, selectedPiece.colour)) {
-        psuedoLegalSet(
-          newBoardArray,
-          selectedSquare,
-          y,
-          x,
-          MOVE_STATES.LEGAL_TAKING,
-          turn
-        )
+      psuedoLegalSet(
+        newBoardArray,
+        selectedSquare,
+        y,
+        x,
+        MOVE_STATES.LEGAL_TAKING,
+        turn,
+        kingPos
+      );
+      break;
     } else {
       break;
     }

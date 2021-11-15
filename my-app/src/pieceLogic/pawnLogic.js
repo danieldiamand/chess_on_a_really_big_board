@@ -5,7 +5,13 @@ import { PAWN_STATES, MOVE_STATES, PIECES, COLOURS } from "../constants";
 import { isMoveLegal } from "./isMoveLegal";
 import { psuedoLegalSet } from "../utils";
 
-function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
+function pawnLogic({
+  selectedPiece,
+  selectedSquare,
+  newBoardArray,
+  turn,
+  kingPos,
+}) {
   // set direction pawn moves
   const turnDirection = turnToTurnDirection(selectedPiece.colour);
   // check if can move 1 square forward, if at the end of board the move is considered a promotion.
@@ -22,14 +28,15 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
         ? MOVE_STATES.LEGAL_PROMOTION
         : MOVE_STATES.LEGAL_EMPTY;
 
-      psuedoLegalSet(
-        newBoardArray,
-        selectedSquare,
-        selectedSquare[0] - turnDirection,
-        selectedSquare[1],
-        newMoveState,
-        turn
-      )
+    psuedoLegalSet(
+      newBoardArray,
+      selectedSquare,
+      selectedSquare[0] - turnDirection,
+      selectedSquare[1],
+      newMoveState,
+      turn,
+      kingPos
+    );
   }
   // let pawn leap up to half way across the board, if it hasn't moved before
 
@@ -51,16 +58,15 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
       if (
         get(newBoardArray, [i, selectedSquare[1], "piece"]) === PIECES.EMPTY
       ) {
-
-          psuedoLegalSet(
-            newBoardArray,
-            selectedSquare,
-            i,
-            selectedSquare[1],
-            MOVE_STATES.LEGAL_EMPTY,
-            turn
-          )
-
+        psuedoLegalSet(
+          newBoardArray,
+          selectedSquare,
+          i,
+          selectedSquare[1],
+          MOVE_STATES.LEGAL_EMPTY,
+          turn,
+          kingPos
+        );
       } else {
         break;
       }
@@ -82,26 +88,15 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
         selectedPiece.colour
       )
     ) {
-      if (
-        isMoveLegal(
-          newBoardArray,
-          selectedSquare,
-          selectedSquare[0] - turnDirection,
-          selectedSquare[1] + shiftDirection,
-          MOVE_STATES.LEGAL_EMPTY,
-          turn
-        )
-      ) {
-        set(
-          newBoardArray,
-          [
-            selectedSquare[0] - turnDirection,
-            selectedSquare[1] + shiftDirection,
-            "moveState",
-          ],
-          MOVE_STATES.LEGAL_TAKING
-        );
-      }
+      psuedoLegalSet(
+        newBoardArray,
+        selectedSquare,
+        selectedSquare[0] - turnDirection,
+        selectedSquare[1] + shiftDirection,
+        MOVE_STATES.LEGAL_TAKING,
+        turn,
+        kingPos
+      );
     } else {
       for (
         let i = selectedSquare[0];
@@ -115,14 +110,14 @@ function pawnLogic({ selectedPiece, selectedSquare, newBoardArray, turn }) {
             "enpassantable",
           ]) === PAWN_STATES.JUST_LEAPED
         ) {
-          set(
+          psuedoLegalSet(
             newBoardArray,
-            [
-              selectedSquare[0] - turnDirection,
-              selectedSquare[1] + shiftDirection,
-              "moveState",
-            ],
-            MOVE_STATES.LEGAL_EN_PASSANT
+            selectedSquare,
+            selectedSquare[0] - turnDirection,
+            selectedSquare[1] + shiftDirection,
+            MOVE_STATES.LEGAL_EN_PASSANT,
+            turn,
+            kingPos
           );
           break;
         }

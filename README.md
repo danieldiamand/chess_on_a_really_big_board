@@ -10,6 +10,7 @@ React project based on the chess variant of the same name.
 > - Improve UI and scaling with window size
 > - Read and use text moves
 > - Improve updatePiecePosition.js (still retroactively checks for enpassant and castling)
+> - Bug king can castle with wrong coloured rook (when correct coloured is next?)
 
 ## Requires:
 
