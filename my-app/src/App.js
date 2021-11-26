@@ -16,9 +16,14 @@ import Board from "./components/Board";
 import { genBoardArray, updateBoardArray } from "./utils/boardArrayManager";
 import { COLOURS } from "./constants";
 
+<<<<<<< Updated upstream
 let fenCode =
   "rnmgboaqkcjbgmnr/pppppppppppppppp/16/16/16/16/16/16/16/16/16/16/16/16/PPPPPPPPPPPPPPPP/RNMGBOAQKCJBGMNR";
 
+=======
+let fenCode = "rrk1/4/1R2/1K2";
+//rnmgboaqkcjbgmnr/pppppppppppppppp/16/16/16/16/16/16/16/16/16/16/16/16/PPPPPPPPPPPPPPPP/RNMGBOAQKCJBGMNR";
+>>>>>>> Stashed changes
 let mouseCurrentX = null;
 let mouseCurrentY = null;
 

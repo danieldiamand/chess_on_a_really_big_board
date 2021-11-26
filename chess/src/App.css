@@ -1,0 +1,13 @@
+.outer {
+  background-color: grey;
+  display: inline-block;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  border-style: solid;
+  text-align: center;
+  height: 70%;
+}

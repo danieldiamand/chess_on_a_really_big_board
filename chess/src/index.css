@@ -1,0 +1,16 @@
+body {
+  user-select: none;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+h1 {
+  font-style: italic;
+}
+
+p {
+  font-size: large;
+}
