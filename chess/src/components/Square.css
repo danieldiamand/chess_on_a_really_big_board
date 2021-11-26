@@ -16,6 +16,10 @@
   background-color: burlywood;
 }
 
+.squareVoid {
+  opacity: 0;
+}
+
 .squareHighlight {
   opacity: 0.5;
   user-select: none;

@@ -3,6 +3,7 @@ import get from "lodash.get";
 
 import { pieceImages } from "../constants/pieceImages";
 import { COLORS } from "../constants/colors";
+import { TILES } from "../constants/tiles";
 // import pieceImages from "../constants/pieceImages";
 // import { checkSquareMatch, getMoveStateBoolean } from "../utils";
 // import movableHighlight from "../assets/movableHighlight.png";
@@ -11,15 +12,22 @@ import { COLORS } from "../constants/colors";
 import "./Square.css";
 
 function getSquareClassName(square) {
-  let className = "squareBlack";
+  let typeClassName;
+  let colorClassName = "squareBlack";
+
+  if (square.tile.type === TILES.VOID) {
+    typeClassName = "squareVoid";
+  }
+
   if (square.x % 2 === 0) {
     if (square.y % 2 === 0) {
-      className = "squareWhite";
+      colorClassName = "squareWhite";
     }
   } else if (square.y % 2 !== 0) {
-    className = "squareWhite";
+    colorClassName = "squareWhite";
   }
-  return className;
+
+  return cx(colorClassName, typeClassName);
 }
 
 function Square({
