@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Board from "./components/Board";
 import { COLORS } from "./constants/colors";
 import { boardArray2x2 } from "./fixtures/boards";
+import { updateBoardArray } from "./utils/updateBoardArray";
+
+import cloneDeep from "lodash.clonedeep";
 
 import "./App.css";
+
+let mouseX = null;
+let mouseY = null;
 
 function App() {
   const [mousePos, setMousePos] = useState([0, 0]);
@@ -13,10 +19,21 @@ function App() {
   const [turn, setTurn] = useState(COLORS.WHITE);
   const [boardArray, setBoardArray] = useState(boardArray2x2);
 
-  function clickSquare(square) {}
-
-  let mouseX = null;
-  let mouseY = null;
+  function update({ clickedSquare, isMouseDown }) {
+    const newBoardArray = updateBoardArray({
+      boardArray,
+      turn,
+      clickedSquare,
+      selectedSquare,
+    });
+    setBoardArray(newBoardArray);
+    if (selectedSquare) {
+      setSelectedSquare(null);
+    } else {
+      setSelectedSquare(clickedSquare);
+    }
+    setIsMouseDown(isMouseDown);
+  }
 
   return (
     <div className="outer">
@@ -28,8 +45,7 @@ function App() {
           setMousePos([event.clientX, event.clientY]);
         }}
         onMouseLeave={(event) => {
-          setSelectedSquare(null);
-          setIsMouseDown(false);
+          update({ selectedSquare: null, isMouseDown: false });
         }}
       >
         <Board
@@ -40,13 +56,11 @@ function App() {
             mouseX = clientX;
             mouseY = clientY;
           }}
-          onMouseUp={(square) => {
-            setIsMouseDown(false);
-            clickSquare(square, false);
+          onMouseUp={(clickedSquare) => {
+            update({ clickedSquare, isMouseDown: false });
           }}
-          onMouseDown={(square) => {
-            setIsMouseDown(true);
-            clickSquare(square, true);
+          onMouseDown={(clickedSquare) => {
+            update({ clickedSquare, isMouseDown: true });
           }}
         />
       </div>
