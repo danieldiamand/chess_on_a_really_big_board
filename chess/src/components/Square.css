@@ -1,0 +1,33 @@
+.square {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.squareBlack {
+  background-color: brown;
+}
+
+.squareWhite {
+  background-color: burlywood;
+}
+
+.squareHighlight {
+  opacity: 0.5;
+  user-select: none;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.opaque {
+  opacity: 60%;
+}

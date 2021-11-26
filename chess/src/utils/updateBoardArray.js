@@ -7,7 +7,6 @@ export function updateBoardArray({
   selectedSquare,
 }) {
   const clonedBoardArray = cloneDeep(boardArray);
-  boardArray[0][0].piece = "FLOWER";
 
   return boardArray;
 }

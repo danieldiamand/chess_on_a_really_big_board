@@ -1,5 +1,6 @@
 import { COLORS } from "../constants/colors";
 import "./Row.css";
+import Square from "./Square";
 
 function Row({
   rowArray,
@@ -13,15 +14,9 @@ function Row({
   return (
     <div className="row">
       {rowArray.map((square, index) => {
-        let color;
-        if (square.color === COLORS.BLACK) {
-          color = "black";
-        } else if (square.color === COLORS.WHITE) {
-          color = "white";
-        }
         return (
-          <span
-            style={{ color: color }}
+          <Square
+            square={square}
             onMouseMove={(event) => {
               onMouseMove({
                 clientX: event.clientX,
@@ -36,9 +31,7 @@ function Row({
               event.stopPropagation();
               event.preventDefault();
             }}
-          >
-            {square.piece}
-          </span>
+          />
         );
       })}
     </div>
