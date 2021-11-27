@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import Board from "./components/Board";
 import { COLORS } from "./constants/colors";
-import { boardArray2x2 } from "./fixtures/boards";
-import { updateBoardArray } from "./utils/updateBoardArray";
+import { board2x2 } from "./fixtures/boards";
+import { updateBoard } from "./utils/updateBoard";
 import MovingPiece from "./components/MovingPiece";
 
 import cloneDeep from "lodash.clonedeep";
@@ -18,17 +18,17 @@ function App() {
   const [selectedSquare, setSelectedSquare] = useState(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [turn, setTurn] = useState(COLORS.WHITE);
-  const [boardArray, setBoardArray] = useState(boardArray2x2);
+  const [board, setBoard] = useState(board2x2);
 
   function update({ clickedSquare, isMouseDown }) {
-    const newBoardArray = updateBoardArray({
-      boardArray,
+    const newBoard = updateBoard({
+      board,
       turn,
       clickedSquare,
       selectedSquare,
     });
-    setBoardArray(newBoardArray);
-    if (selectedSquare) {
+    setBoard(newBoard);
+    if (selectedSquare && !isMouseDown) {
       setSelectedSquare(null);
     } else {
       setSelectedSquare(clickedSquare);
@@ -54,7 +54,7 @@ function App() {
         }}
       >
         <Board
-          boardArray={boardArray}
+          board={board}
           selectedSquare={selectedSquare}
           turn={turn}
           onMouseMove={({ clientX, clientY }) => {

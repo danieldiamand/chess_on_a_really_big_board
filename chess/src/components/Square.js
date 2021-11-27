@@ -6,8 +6,8 @@ import { COLORS } from "../constants/colors";
 import { TILES } from "../constants/tiles";
 // import pieceImages from "../constants/pieceImages";
 // import { checkSquareMatch, getMoveStateBoolean } from "../utils";
-// import movableHighlight from "../assets/movableHighlight.png";
-// import takeableHighlight from "../assets/takeableHighlight.png";
+import movableHighlight from "../assets/movableHighlight.png";
+import takeableHighlight from "../assets/takeableHighlight.png";
 
 import "./Square.css";
 
@@ -36,7 +36,7 @@ function Square({
   //   currentRow,
   //   selectedSquare,
   //   turn,
-  //   boardArray,
+  //   board,
   square,
   onMouseMove,
   onMouseUp,
@@ -84,7 +84,7 @@ function Square({
   //       )}
   //     </div>
 
-  const { isTakeable, isLegal, isCheck, isSelected, isDragged } = square.flags;
+  const { isTakeable, isLegal, isDragged } = square.flags;
 
   const pieceImg = get(pieceImages, [square.piece.color, square.piece.type]);
 
@@ -97,10 +97,10 @@ function Square({
       onMouseUp={onMouseUp}
       onMouseDown={onMouseDown}
     >
-      {/* <div className="squareHighlight">
-         {isTakeable && <img src={takeableHighlight} alt="" />}
-         {isLegal && <img src={movableHighlight} alt="" />}
-       </div> */}
+      <div className="squareHighlight">
+        {isTakeable && <img src={takeableHighlight} alt="" />}
+        {isLegal && <img src={movableHighlight} alt="" />}
+      </div>
       {pieceImg && (
         <img src={pieceImg} alt="" className={isDragged ? "opaque" : ""} />
       )}

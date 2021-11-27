@@ -2,14 +2,14 @@ import Row from "./Row";
 import "./Board.css";
 
 function Board({
-  boardArray,
+  board,
   selectedSquare,
   turn,
   onMouseMove,
   onMouseUp,
   onMouseDown,
 }) {
-  return boardArray.map((rowArray, index) => {
+  return board.map((rowArray, index) => {
     return (
       <div className="board">
         <Row
@@ -17,7 +17,7 @@ function Board({
           currentRow={index}
           selectedSquare={selectedSquare}
           turn={turn}
-          boardArray={boardArray}
+          board={board}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
           onMouseDown={onMouseDown}

@@ -6,7 +6,7 @@ function Row({
   rowArray,
   selectedSquare,
   turn,
-  boardArray,
+  board,
   onMouseMove,
   onMouseUp,
   onMouseDown,

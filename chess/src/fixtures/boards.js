@@ -2,13 +2,13 @@ import { TILES } from "../constants/tiles";
 import { COLORS } from "../constants/colors";
 import { PIECES } from "../constants/pieces";
 
-export const boardArray2x2 = [
+export const board2x2 = [
   [
     {
       x: 0,
       y: 0,
       piece: {
-        type: PIECES.ROOK,
+        type: PIECES.PAWN,
         color: COLORS.BLACK,
       },
       tile: {
@@ -23,7 +23,7 @@ export const boardArray2x2 = [
       x: 1,
       y: 0,
       piece: {
-        type: PIECES.ROOK,
+        type: PIECES.KING,
         color: COLORS.BLACK,
       },
       tile: {
@@ -38,7 +38,7 @@ export const boardArray2x2 = [
       x: 2,
       y: 0,
       piece: {
-        type: PIECES.ROOK,
+        type: PIECES.PAWN,
         color: COLORS.BLACK,
       },
       tile: {
