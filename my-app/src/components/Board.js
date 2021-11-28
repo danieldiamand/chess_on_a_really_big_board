@@ -9,10 +9,10 @@ function Board({
   onMouseUp,
   onMouseDown,
 }) {
-  return boardArray.map((rowArray, index) => {
+  return boardArray.map((row, index) => {
     return (
       <Row
-        rowArray={rowArray}
+        row={row}
         currentRow={index}
         selectedSquare={selectedSquare}
         turn={turn}

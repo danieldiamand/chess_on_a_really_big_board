@@ -1,10 +1,20 @@
-body {
+html {
   user-select: none;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   text-align: center;
   font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: none;
 }
 
 h1 {

@@ -1,7 +1,7 @@
 import Column from "./Column";
 
 function Row({
-  rowArray,
+  row,
   currentRow,
   currentPiece,
   selectedSquare,
@@ -13,7 +13,7 @@ function Row({
 }) {
   return (
     <div>
-      {rowArray.map((piece, index) => {
+      {row.map((piece, index) => {
         return (
           <Column
             currentPiece={piece}
