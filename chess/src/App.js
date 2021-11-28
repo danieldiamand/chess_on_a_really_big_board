@@ -56,7 +56,6 @@ function App() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  const [mousePos, setMousePos] = useState([0, 0]);
   const [selectedSquare, setSelectedSquare] = useState(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [turn, setTurn] = useState(COLORS.WHITE);
@@ -105,20 +104,16 @@ function App() {
         <p>is square selected: {!!selectedSquare ? "true" : "false"}</p>
         <p>is mouse down: {isMouseDown ? "true" : "false"}</p>
       </div>
-      {isMouseDown && selectedSquare && (
+      {
         <MovingPiece
           config={config}
-          x={mousePos[0]}
-          y={mousePos[1]}
-          square={selectedSquare}
+          isMouseDown={isMouseDown}
+          selectedSquare={selectedSquare}
         />
-      )}
+      }
       <div className="outer">
         <div
           className="inner"
-          onMouseMove={(event) => {
-            setMousePos([event.clientX, event.clientY]);
-          }}
           onMouseLeave={(event) => {
             update({ selectedSquare: null, isMouseDown: false });
           }}

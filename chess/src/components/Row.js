@@ -14,6 +14,7 @@ function Row({
   return row.map((square, index) => {
     return (
       <Square
+        key={`${square.x}x${square.y}`}
         square={square}
         onMouseMove={(event) => {
           onMouseMove({
