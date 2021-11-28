@@ -101,8 +101,15 @@ function Square({
         {isTakeable && <img src={takeableHighlight} alt="" />}
         {isLegal && <img src={movableHighlight} alt="" />}
       </div>
+
       {pieceImg && (
-        <img src={pieceImg} alt="" className={isDragged ? "opaque" : ""} />
+        <div className="squarePiece">
+          <img
+            src={pieceImg}
+            alt=""
+            className={cx(isDragged ? "opaque" : null)}
+          />
+        </div>
       )}
     </div>
   );

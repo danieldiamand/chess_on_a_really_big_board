@@ -1,7 +1,8 @@
 .square {
-  width: 70px;
-  height: 70px;
+  max-width: 150px;
+  max-height: 150px;
   display: inline-block;
+  position: relative;
   vertical-align: top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -24,14 +25,32 @@
   opacity: 0.5;
   user-select: none;
   pointer-events: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
-  position: absolute;
+}
+
+.squareHighlight img {
+  width: auto;
+  height: 80%;
 }
 
 .opaque {
   opacity: 60%;
+}
+
+.squarePiece {
+  display: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.squarePiece img {
+  width: auto;
+  height: 80%;
 }
