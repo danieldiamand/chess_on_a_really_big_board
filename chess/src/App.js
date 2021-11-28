@@ -10,6 +10,7 @@ import { updateBoard } from "./utils/updateBoard";
 import MovingPiece from "./components/MovingPiece";
 
 import cloneDeep from "lodash.clonedeep";
+import get from "lodash.get";
 
 import "./App.css";
 
@@ -80,18 +81,21 @@ function App() {
   }, []);
 
   function update({ clickedSquare, isMouseDown }) {
-    const newBoard = updateBoard({
+    const {
+      board: newBoard,
+      turn: newTurn,
+      selectedSquare: newSelectedSquare,
+    } = updateBoard({
       board,
       turn,
       clickedSquare,
       selectedSquare,
+      isMouseDown,
     });
+
     setBoard(newBoard);
-    if (selectedSquare && !isMouseDown) {
-      setSelectedSquare(null);
-    } else {
-      setSelectedSquare(clickedSquare);
-    }
+    setTurn(newTurn);
+    setSelectedSquare(newSelectedSquare);
     setIsMouseDown(isMouseDown);
   }
 
