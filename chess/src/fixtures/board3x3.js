@@ -2,7 +2,7 @@ import { TILES } from "../constants/tiles";
 import { COLORS } from "../constants/colors";
 import { PIECES } from "../constants/pieces";
 
-export const board2x2 = [
+export const board3x3 = [
   [
     {
       x: 0,
