@@ -4,12 +4,16 @@ import { pieceImages } from "../constants/pieceImages";
 
 import "./MovingPiece.css";
 
-function MovingPiece({ x, y, square }) {
+function MovingPiece({ config, x, y, square }) {
   const pieceImg = get(pieceImages, [square.piece.color, square.piece.type]);
+  console.log(config.tileSize);
   return (
-    <div className="movingPiece" style={{ left: x, top: y }}>
-      <img src={pieceImg} alt="" />
-    </div>
+    <img
+      className="movingPiece"
+      src={pieceImg}
+      alt=""
+      style={{ left: x, top: y, height: config.tileSize * 0.8 }}
+    />
   );
 }
 

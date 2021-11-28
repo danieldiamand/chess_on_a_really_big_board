@@ -4,13 +4,6 @@
   position: absolute;
   top: -9999px;
   left: -9999px;
-  width: 0px;
-  height: 0px;
-}
-
-.movingPiece img {
-  width: 60px;
-  height: auto;
-  margin-left: -20px;
-  margin-top: -20px;
+  width: auto;
+  transform: translate(-50%, -50%);
 }

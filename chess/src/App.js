@@ -97,7 +97,6 @@ function App() {
   }
 
   const config = getConfig(board, windowSize);
-  console.log(config);
 
   return (
     <Fragment>
@@ -107,7 +106,12 @@ function App() {
         <p>is mouse down: {isMouseDown ? "true" : "false"}</p>
       </div>
       {isMouseDown && selectedSquare && (
-        <MovingPiece x={mousePos[0]} y={mousePos[1]} square={selectedSquare} />
+        <MovingPiece
+          config={config}
+          x={mousePos[0]}
+          y={mousePos[1]}
+          square={selectedSquare}
+        />
       )}
       <div className="outer">
         <div
