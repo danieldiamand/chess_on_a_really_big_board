@@ -3,6 +3,8 @@ import set from "lodash.set";
 import get from "lodash.get";
 import { TILES } from "../constants/tiles";
 import { COLORS } from "../constants/colors";
+import { PIECES } from "../constants/pieces";
+import generateLegalMoves from "../logic/generateLegalMoves";
 
 function colorToDirection(color) {
   if (color === COLORS.WHITE) {
@@ -47,9 +49,12 @@ export function updateBoard({
     selectedSquare,
     turn,
   });
-
+  let kingSquare = null;
   for (let row of newBoard) {
     for (let square of row) {
+      if (square.piece === PIECES.KING && square.color === turn) {
+        kingSquare = square;
+      }
       if (
         clickedSquare &&
         clickedSquare.x === square.x &&
@@ -63,15 +68,8 @@ export function updateBoard({
       square.flags.isLegal = false;
     }
   }
-
-  try {
-    if (newSelectedSquare) {
-      newBoard[newSelectedSquare.y + colorToDirection(turn)][
-        newSelectedSquare.x
-      ].flags.isLegal = true;
-    }
-  } catch (e) {
-    console.error(e);
+  if (newSelectedSquare) {
+    newBoard = generateLegalMoves(newBoard, kingSquare, newSelectedSquare);
   }
 
   if (selectedSquare && clickedSquare && clickedSquare.flags.isLegal === true) {

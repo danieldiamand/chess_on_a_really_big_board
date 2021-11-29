@@ -19,7 +19,7 @@ for (let y = 0; y < maxX; y++) {
       piece:
         y <= 1 || y >= maxY - 2
           ? {
-              type: PIECES.PAWN,
+              type: PIECES.ROOK,
               color: y < maxY / 2 ? COLORS.BLACK : COLORS.WHITE,
             }
           : {
