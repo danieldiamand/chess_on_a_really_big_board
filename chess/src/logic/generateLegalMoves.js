@@ -11,27 +11,43 @@ function generateLegalMoves(newBoard, kingSquare, selectedSquare) {
         [-1, 0],
       ]);
       break;
-    case selectedSquare.piece === PIECES.BISHOP:
+    case selectedSquare.piece.type === PIECES.BISHOP:
+      lineLogic(newBoard, kingSquare, selectedSquare, [
+        [1, 1],
+        [1, -1],
+        [-1, 1],
+        [-1, -1],
+      ]);
       break;
-    case selectedSquare.piece === PIECES.QUEEN:
+    case selectedSquare.piece.type === PIECES.QUEEN:
+      lineLogic(newBoard, kingSquare, selectedSquare, [
+        [0, 1],
+        [0, -1],
+        [1, 0],
+        [-1, 0],
+        [1, 1],
+        [1, -1],
+        [-1, 1],
+        [-1, -1],
+      ]);
       break;
-    case selectedSquare.piece === PIECES.KNIGHT:
+    case selectedSquare.piece.type === PIECES.KNIGHT:
       break;
-    case selectedSquare.piece === PIECES.KING:
+    case selectedSquare.piece.type === PIECES.KING:
       break;
-    case selectedSquare.piece === PIECES.PAWN:
+    case selectedSquare.piece.type === PIECES.PAWN:
       break;
-    case selectedSquare.piece === PIECES.CHANCELLOR:
+    case selectedSquare.piece.type === PIECES.CHANCELLOR:
       break;
-    case selectedSquare.piece === PIECES.ARCHBISHOP:
+    case selectedSquare.piece.type === PIECES.ARCHBISHOP:
       break;
-    case selectedSquare.piece === PIECES.MOON:
+    case selectedSquare.piece.type === PIECES.MOON:
       break;
-    case selectedSquare.piece === PIECES.GRAVE:
+    case selectedSquare.piece.type === PIECES.GRAVE:
       break;
-    case selectedSquare.piece === PIECES.JESTER:
+    case selectedSquare.piece.type === PIECES.JESTER:
       break;
-    case selectedSquare.piece === PIECES.ROSE:
+    case selectedSquare.piece.type === PIECES.ROSE:
       break;
     default:
   }
