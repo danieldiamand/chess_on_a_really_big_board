@@ -1,4 +1,8 @@
 export const TILES = {
   NORMAL: "NORMAL",
   VOID: "VOID",
+  FOG: "FOG",
+  WHITE_PIECES_ONLY: "WHITE_ONLY",
+  BLACK_PIECES_ONLY: "BLACK_ONLY",
+  LAVA: "LAVA",
 };
