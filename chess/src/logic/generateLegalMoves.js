@@ -1,3 +1,4 @@
+import flowerLogic from "./flowerLogic";
 import { PIECES } from "../constants/pieces";
 import lineLogic from "./lineLogic";
 
@@ -32,6 +33,16 @@ function generateLegalMoves(newBoard, kingSquare, selectedSquare) {
       ]);
       break;
     case selectedSquare.piece.type === PIECES.KNIGHT:
+      flowerLogic(newBoard, kingSquare, selectedSquare, [
+        [1, 2],
+        [-1, 2],
+        [1, -2],
+        [-1, -2],
+        [2, 1],
+        [-2, 1],
+        [2, -1],
+        [-2, -1],
+      ]);
       break;
     case selectedSquare.piece.type === PIECES.KING:
       break;
